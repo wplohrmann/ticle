@@ -145,20 +145,20 @@ function Game() {
       });
   }, [])
 
-  useEffect(async () => {
+  useEffect(() => {
+    const asyncEffect = async () => {
     const possibleWords = await fetch('/possible_words.txt')
       .then(response => response.text())
       .then(data => data.split('\n'));
-    const answerWords = await fetch('/answer_words.txt')
-      .then(response => response.text())
-      .then(data => data.split('\n'));
-    setPossibleWords([...possibleWords, ...answerWords]);
+    setPossibleWords(possibleWords);
+    };
+    asyncEffect();
   }, [])
 
 
   const turnColour = getPlayerColour(currentPlayer);
 
-  if (correctWords === null) {
+  if (correctWords === null || possibleWords === null) {
     return <div>Loading...</div>
   }
   return (<>
