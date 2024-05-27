@@ -1,0 +1,5 @@
+* Only display a letter as yellow if it appears twice and you've got one of them correct
+* Add a keyboard to indicate what letter's have been used
+* Zoom the currently active square
+* If you don't get it after five guesses, it turns into your opponent's colour
+* Not allowed to guess the same word twice
