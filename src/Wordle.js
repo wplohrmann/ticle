@@ -3,8 +3,7 @@ import { getPlayerColour } from './utils';
 import Row from './Row';
 
 function Wordle(args) {
-  const {onWin, player, changePlayer, isActive, coords, winner, chooseGrid, turnColour, possibleWords, wordState, setWordState, exitPopUp, isPopUp} = args;
-  const correctWord = "apple"; // TODO: revert
+  const {onWin, player, changePlayer, isActive, coords, winner, chooseGrid, turnColour, possibleWords, wordState, setWordState, exitPopUp, isPopUp, correctWord} = args;
   // An array of words, each array is a guessed word
   const currentRow = wordState.length;
   const [finished, setFinished] = useState(false);

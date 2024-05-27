@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {getCellColor} from './utils';
 function Row(args) {
   const {guessWord, guessedWord, correctWord, isActive, coords, exitPopUp} = args;
   const [inputValue, setInputValue] = useState('');
@@ -24,18 +25,6 @@ function Row(args) {
       }
     }
   }
-  const getCellColor = (guessedLetter, correctLetter) => {
-    const lowerGuessedLetter = guessedLetter.toLowerCase();
-    const lowerCorrectLetter = correctLetter.toLowerCase();
-
-    if (lowerGuessedLetter === lowerCorrectLetter) {
-      return "green";
-    } else if (correctWord.toLowerCase().includes(lowerGuessedLetter)) {
-      return "yellow";
-    } else {
-      return "gray";
-    }
-  }
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
@@ -50,7 +39,7 @@ function Row(args) {
     return (
       <div className="row">
         {[...Array(5)].map((e, i) =>
-          <div className={`cell ${getCellColor(guessedWord[i], correctWord[i])}`}>
+          <div className={`cell ${getCellColor(guessedWord.toLowerCase(), correctWord.toLowerCase(), i)}`}>
             {guessedWord[i]}
           </div>
         )}
