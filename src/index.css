@@ -21,7 +21,7 @@ body {
 
 #board {
   display: grid;
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   grid-gap: 5px;
 }
 
@@ -66,16 +66,70 @@ body {
   height: 100%;
 }
 
-.game-won {
+.game-won-blue {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 12em;
   font-weight: bold;
-  color: #d400ff;
+  color: blue;
   height: 100%;
 }
 
-.active-game {
+.game-won-red {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12em;
+  font-weight: bold;
+  color: red;
+  height: 100%;
+}
+
+.active-game-blue {
   outline: 2px solid blue;
+}
+
+.active-game-red {
+  outline: 2px solid red;
+}
+
+.main-menu {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #121213;
+}
+
+.main-menu h1 {
+  color: #f5f5f5;
+  font-size: 2em;
+}
+
+.main-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.main-menu ul li {
+  margin: 10px 0;
+}
+
+.main-menu ul li a {
+  color: #f5f5f5;
+  text-decoration: none;
+}
+
+.main-menu ul li a:hover {
+  color: #007BFF;
+}
+
+.game-title {
+  color: #f5f5f5;
+  font-size: 5em;
+  text-align: center;
+  margin-bottom: 50px;
 }
