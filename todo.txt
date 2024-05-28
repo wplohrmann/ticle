@@ -1,5 +1,15 @@
-* Only display a letter as yellow if it appears twice and you've got one of them correct
+* Add typescript
+* Refactor state management to use redux
+
 * Add a keyboard to indicate what letter's have been used
-* Zoom the currently active square
 * If you don't get it after five guesses, it turns into your opponent's colour
+* Skip buttons + timer (If time runs out you have to skip)
+* Two skips, and the game ends in a draw
+* Styling the menu better
+* How to play
 * Not allowed to guess the same word twice
+
+* Add online play
+* Add ads
+
+* Deploy

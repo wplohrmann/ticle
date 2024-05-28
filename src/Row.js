@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {getCellColor} from './utils';
+import {getCellColour} from './utils';
 function Row(args) {
   const {guessWord, guessedWord, correctWord, isActive, coords, exitPopUp} = args;
   const [inputValue, setInputValue] = useState('');
@@ -39,7 +39,7 @@ function Row(args) {
     return (
       <div className="row">
         {[...Array(5)].map((e, i) =>
-          <div className={`cell ${getCellColor(guessedWord.toLowerCase(), correctWord.toLowerCase(), i)}`}>
+          <div className={`cell ${getCellColour(guessedWord.toLowerCase(), correctWord.toLowerCase(), i)}`}>
             {guessedWord[i]}
           </div>
         )}
