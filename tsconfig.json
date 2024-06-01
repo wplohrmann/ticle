@@ -1,10 +1,10 @@
 {
-    "compilerOptions": {
-      "noEmit": true,
-      "esModuleInterop": true,
-      "allowJs": false,
-      "target": "es5",
-      "jsx": "react"
-    },
-    "include": ["./src/**/*"]
-  }
+  "compilerOptions": {
+    "noEmit": true,
+    "esModuleInterop": true,
+    "allowJs": false,
+    "target": "es5",
+    "jsx": "react"
+  },
+  "include": ["./src/**/*"]
+}
