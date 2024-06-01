@@ -1,40 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { getCellColour } from "./utils";
+import React, { useState, useEffect } from 'react'
+import { getCellColour } from './utils'
 function Row(args) {
-  const { guessWord, guessedWord, correctWord, isActive } =
-    args;
-  const [inputValue, setInputValue] = useState("");
+  const { guessWord, guessedWord, correctWord, isActive } = args
+  const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
     if (!isActive || guessWord === null) {
-      setInputValue("");
+      setInputValue('')
     }
-  }, [setInputValue, guessWord, isActive]);
-
+  }, [setInputValue, guessWord, isActive])
 
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (!isActive || guessWord === null) {
-        return;
+        return
       }
-      if (event.key === "Enter" && inputValue.length === 5) {
-        guessWord(inputValue);
-        setInputValue("");
-      } else if (event.key === "Backspace" && inputValue.length > 0) {
-        setInputValue(inputValue.slice(0, -1));
+      if (event.key === 'Enter' && inputValue.length === 5) {
+        guessWord(inputValue)
+        setInputValue('')
+      } else if (event.key === 'Backspace' && inputValue.length > 0) {
+        setInputValue(inputValue.slice(0, -1))
       } else if (event.key.length === 1 && inputValue.length < 5) {
         if (/^[a-zA-Z]$/.test(event.key)) {
-          setInputValue(inputValue + event.key);
+          setInputValue(inputValue + event.key)
         }
       }
-    };
-    window.addEventListener("keydown", handleKeyPress);
+    }
+    window.addEventListener('keydown', handleKeyPress)
 
     // Cleanup function to remove the event listener
     return () => {
-      window.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [inputValue, guessWord, isActive]); // Re-run the effect when `inputValue` change
+      window.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [inputValue, guessWord, isActive]) // Re-run the effect when `inputValue` change
 
   if (guessedWord !== null) {
     return (
@@ -47,16 +45,16 @@ function Row(args) {
           </div>
         ))}
       </div>
-    );
+    )
   } else {
     return (
       <div className="row">
         {[...Array(5)].map((e, i) => (
-          <div className="cell">{inputValue[i] || ""}</div>
+          <div className="cell">{inputValue[i] || ''}</div>
         ))}
       </div>
-    );
+    )
   }
 }
 
-export default Row;
+export default Row

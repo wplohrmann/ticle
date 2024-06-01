@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 function PopUp({ children, popUpRef }) {
   return (
@@ -7,7 +7,7 @@ function PopUp({ children, popUpRef }) {
         {children}
       </div>
     </div>
-  );
+  )
 }
 
-export default PopUp;
+export default PopUp
