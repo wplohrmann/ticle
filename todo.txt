@@ -1,4 +1,3 @@
-* Add typescript
 * Refactor state management to use redux
 
 * Add a keyboard to indicate what letter's have been used
