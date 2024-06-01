@@ -9,12 +9,12 @@ import './App.css';
 
 
 function Game() {
-  const [gameState, setGameState] = useState(Array(3).fill().map(() => Array(3).fill(null)));
+  const [gameState, setGameState] = useState(Array(3).fill(null).map(() => Array(3).fill(null)));
   const [currentPlayer, setCurrentPlayer] = useState('O');
   const [activeGame, setActiveGame] = useState(null);
   const [correctWords, setcorrectWords] = useState(null);
   const [possibleWords, setPossibleWords] = useState(null);
-  const [wordState, setWordState] = useState(Array(3).fill().map(() => Array(3).fill([])));
+  const [wordState, setWordState] = useState(Array(3).fill(null).map(() => Array(3).fill([])));
   const popUpRef = useRef(null);
 
   const setIndividualWordState = (i, j, word) => {
@@ -38,7 +38,7 @@ function Game() {
         const getRandomIndex = (max) => Math.floor(Math.random() * max);
 
         // Create a 3x3 array and fill it with random words from the array
-        setcorrectWords(Array(3).fill().map(() => Array(3).fill().map(() => words[getRandomIndex(words.length)])));
+        setcorrectWords(Array(3).fill(null).map(() => Array(3).fill(null).map(() => words[getRandomIndex(words.length)])));
 
       });
   }, [])
@@ -106,7 +106,7 @@ function Game() {
       winner={winner}
       chooseGrid={() => chooseGrid(i, j)}
       turnColour={turnColour}
-      
+
     />
   ));
   let inputWordle = null;
