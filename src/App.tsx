@@ -5,6 +5,7 @@ import Wordle from './Wordle'
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
 import { getPlayerColour } from './utils'
 import './App.css'
+import Keyboard from './Keyboard'
 
 function Game() {
   const [gameState, setGameState] = useState(
@@ -134,9 +135,10 @@ function Game() {
     ))
   )
   let inputWordle = null
+  let inputKeyBoard = null
   if (activeGame !== null) {
     const [i, j] = activeGame
-    inputWordle = activeGame !== null && (
+    inputWordle = (
       <Wordle
         correctWord={correctWords[i][j]}
         player={currentPlayer}
@@ -151,6 +153,9 @@ function Game() {
         exitPopUp={() => setActiveGame(null)}
       />
     )
+    inputKeyBoard = (
+      <Keyboard submitKey={() => true}/> // TODO
+    )
   }
   return (
     <>
@@ -159,7 +164,7 @@ function Game() {
       </div>
       <div style={{ position: 'relative' }}>
         {activeGame !== null && (
-          <PopUp popUpRef={popUpRef}>{inputWordle}</PopUp>
+          <PopUp popUpRef={popUpRef} wordle={inputWordle} keyboard={inputKeyBoard}/>
         )}
         <div className="game-grid">{wordles}</div>
       </div>

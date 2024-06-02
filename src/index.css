@@ -151,9 +151,47 @@ body {
   width: 80%;
   height: 80%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
   background-color: rgb(129, 129, 129);
   z-index: 100;
+  margin: 10px;
+}
+
+.pop-up-title {
+  font-size: 48px;
+  flex: 1; /* This will take up 1 fraction of the available space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pop-up-wordle {
+  flex: 2; /* This will take up 2 fractions of the available space */
+}
+
+.pop-up-keyboard {
+  flex: 2; /* This will take up 2 fractions of the available space */
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboard-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+}
+
+.keyboard-key {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center; /* Add this line to center the text horizontally */
+  align-items: center; /* Add this line to center the text vertically */
 }
