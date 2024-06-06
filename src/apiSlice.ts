@@ -1,8 +1,5 @@
 // Import the RTK Query methods from the React-specific entry point
-import { createEntityAdapter } from '@reduxjs/toolkit'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-const correctWordsAdapter = createEntityAdapter()
 
 // Define our single API slice object
 export const apiSlice = createApi({

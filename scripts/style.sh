@@ -3,5 +3,5 @@
 set -e
 
 npx tsc
-npx prettier --write .
-npx eslint --fix .
+npx prettier --write src/
+npx eslint --fix src/

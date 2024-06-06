@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { getPlayerColour } from './utils'
 import Row from './Row'
 import { useAppDispatch, useAppSelector } from './hooks'

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PopUp from './PopUp'
 import Wordle from './Wordle'
 import { getPlayerColour } from './utils'
@@ -36,7 +36,7 @@ function Game() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [popUpRef])
+  }, [popUpRef, dispatch])
 
   useEffect(() => {
     function handleKeyPress(event) {
@@ -61,7 +61,7 @@ function Game() {
     return () => {
       document.removeEventListener('keydown', handleKeyPress)
     }
-  }, [activeGame])
+  }, [activeGame, dispatch])
 
   const turnColour = getPlayerColour(currentPlayer)
 
