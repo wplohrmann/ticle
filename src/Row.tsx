@@ -13,7 +13,7 @@ function Row(args) {
   const { data: correctWords } = useGetCorrectWordsQuery({})
   const correctWord = correctWords[coords[0]][coords[1]]
 
-  if (guessedWord !== null) {
+  if (guessedWord) {
     return (
       <div className="row">
         {[...Array(5)].map((e, i) => (

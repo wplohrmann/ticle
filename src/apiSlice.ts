@@ -6,7 +6,7 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: '/' }),
   endpoints: (builder) => ({
     getCorrectWords: builder.query({
-      query: () => '/answer_words.txt',
+      query: () => ({"url": "/answer_words.txt", "responseHandler": "text"}),
       transformResponse: (response: string) => {
         const words = response.split('\n')
         const getRandomIndex = (max) => Math.floor(Math.random() * max)
@@ -21,7 +21,7 @@ export const apiSlice = createApi({
       },
     }),
     getPossibleWords: builder.query({
-      query: () => '/possible_words.txt',
+      query: () => ({"url": "/possible_words.txt", "responseHandler": "text"}),
       transformResponse: (response: string) => {
         return response.split('\n')
       },

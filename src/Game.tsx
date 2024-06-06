@@ -15,7 +15,7 @@ function Game() {
   const activeGame = useAppSelector((state) => state.game.activeGame)
   const popUpRef = useRef(null)
 
-  const { data: correctWords, isLoading: isCorrectWordsLoading } =
+  const { data: correctWords, isLoading: isCorrectWordsLoading, error } =
     useGetCorrectWordsQuery({})
 
   const { isLoading: isLoadingPossibleWords } = useGetPossibleWordsQuery({})
@@ -68,6 +68,9 @@ function Game() {
   if (isLoading) {
     return <div>Loading...</div>
   }
+  console.log("isLoading", isLoading)
+  console.log("Correct words:", correctWords)
+  console.log("Error", error)
   const wordles = wordleWinners.map((row, i) =>
     row.map((winner, j) => (
       <Wordle
