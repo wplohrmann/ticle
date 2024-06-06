@@ -1,39 +1,27 @@
 import React, { useState } from 'react'
 import { getPlayerColour } from './utils'
 import Row from './Row'
+import { useAppDispatch, useAppSelector } from './hooks'
+import { gameActions } from './gameSlice'
 
 function Wordle(args) {
-  const {
-    onWin,
-    player,
-    changePlayer,
-    isActive,
-    coords,
-    winner,
-    chooseGrid,
-    turnColour,
-    possibleWords,
-    wordState,
-    setWordState,
-    exitPopUp,
-    isPopUp,
-    correctWord,
-  } = args
+  const { coords } = args
   // An array of words, each array is a guessed word
-  const currentRow = wordState.length
-  const [finished, setFinished] = useState(false)
+  const dispatch = useAppDispatch()
+  const winner = useAppSelector(
+    (state) => state.game.wordleWinners[coords[0]][coords[1]]
+  )
+  const isActive = useAppSelector(
+    (state) => state.game.activeGame?.toString() === coords.toString()
+  )
+  const turnColour = useAppSelector((state) =>
+    getPlayerColour(state.game.currentPlayer)
+  )
 
-  const guessWord = (word) => {
-    if (!possibleWords.includes(word.toLowerCase())) {
-      return
-    }
-    setWordState([...wordState, word])
-    if (word.toLowerCase() === correctWord.toLowerCase()) {
-      setFinished(true)
-      onWin(player)
-    }
-    changePlayer()
+  const chooseGrid = () => {
+    dispatch(gameActions.selectActiveGame(coords))
   }
+
   if (winner) {
     const colour = getPlayerColour(winner)
     return (
@@ -49,16 +37,7 @@ function Wordle(args) {
     >
       <div id="board">
         {[...Array(5)].map((e, i) => (
-          <Row
-            guessWord={
-              i === currentRow && !finished && isPopUp ? guessWord : null
-            }
-            guessedWord={i < wordState.length ? wordState[i] : null}
-            correctWord={correctWord}
-            isActive={isActive}
-            coords={coords}
-            exitPopUp={exitPopUp}
-          />
+          <Row rowNumber={i} isActive={isActive} coords={coords} />
         ))}
       </div>
     </div>

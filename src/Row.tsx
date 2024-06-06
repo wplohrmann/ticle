@@ -1,38 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { getCellColour } from './utils'
+import { useAppSelector } from './hooks'
+import { useGetCorrectWordsQuery } from './apiSlice'
 function Row(args) {
-  const { guessWord, guessedWord, correctWord, isActive } = args
-  const [inputValue, setInputValue] = useState('')
+  const { rowNumber, coords } = args
+  const inputValue = useAppSelector((state) => state.game.inputValue)
 
-  useEffect(() => {
-    if (!isActive || guessWord === null) {
-      setInputValue('')
-    }
-  }, [setInputValue, guessWord, isActive])
+  const guessedWord = useAppSelector(
+    (state) => state.game.guessedWords[coords[0]][coords[1]][rowNumber]
+  )
 
-  useEffect(() => {
-    const handleKeyPress = (event) => {
-      if (!isActive || guessWord === null) {
-        return
-      }
-      if (event.key === 'Enter' && inputValue.length === 5) {
-        guessWord(inputValue)
-        setInputValue('')
-      } else if (event.key === 'Backspace' && inputValue.length > 0) {
-        setInputValue(inputValue.slice(0, -1))
-      } else if (event.key.length === 1 && inputValue.length < 5) {
-        if (/^[a-zA-Z]$/.test(event.key)) {
-          setInputValue(inputValue + event.key)
-        }
-      }
-    }
-    window.addEventListener('keydown', handleKeyPress)
-
-    // Cleanup function to remove the event listener
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress)
-    }
-  }, [inputValue, guessWord, isActive]) // Re-run the effect when `inputValue` change
+  const { data: correctWords } = useGetCorrectWordsQuery({})
+  const correctWord = correctWords[coords[0]][coords[1]]
 
   if (guessedWord !== null) {
     return (
