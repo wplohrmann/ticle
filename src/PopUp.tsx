@@ -1,13 +1,19 @@
 import React from 'react'
 
-function PopUp({ wordle, popUpRef, keyboard }) {
+interface PopUpProps {
+  wordle: React.ReactNode
+  popUpRef: React.RefObject<HTMLDivElement>
+  keyboard: React.ReactNode
+}
+
+function PopUp(args: PopUpProps) {
   return (
     <div className="pop-up-container">
-      <div ref={popUpRef} className="pop-up">
+      <div ref={args.popUpRef} className="pop-up">
         <div className="pop-up-title">
         </div>
-        <div className="pop-up-wordle">{wordle}</div>
-        <div className="pop-up-keyboard">{keyboard}</div>
+        <div className="pop-up-wordle">{args.wordle}</div>
+        <div className="pop-up-keyboard">{args.keyboard}</div>
       </div>
     </div>
   )

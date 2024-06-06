@@ -4,7 +4,11 @@ import Row from './Row'
 import { useAppDispatch, useAppSelector } from './hooks'
 import { gameActions } from './gameSlice'
 
-function Wordle(args) {
+interface WordleProps {
+  coords: [number, number]
+}
+
+function Wordle(args: WordleProps) {
   const { coords } = args
   // An array of words, each array is a guessed word
   const dispatch = useAppDispatch()
@@ -37,7 +41,7 @@ function Wordle(args) {
     >
       <div id="board">
         {[...Array(5)].map((e, i) => (
-          <Row rowNumber={i} isActive={isActive} coords={coords} />
+          <Row rowNumber={i} coords={coords} />
         ))}
       </div>
     </div>

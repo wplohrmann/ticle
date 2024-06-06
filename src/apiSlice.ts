@@ -9,7 +9,7 @@ export const apiSlice = createApi({
       query: () => ({"url": "/answer_words.txt", "responseHandler": "text"}),
       transformResponse: (response: string) => {
         const words = response.split('\n')
-        const getRandomIndex = (max) => Math.floor(Math.random() * max)
+        const getRandomIndex = (max: number) => Math.floor(Math.random() * max)
 
         return Array(3)
           .fill(null)
