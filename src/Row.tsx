@@ -10,7 +10,10 @@ interface RowProps {
 function Row(args: RowProps) {
   const { rowNumber, coords } = args
   const inputValue = useAppSelector((state) => {
-    if (state.game.activeGame !== null && state.game.activeGame.toString() === coords.toString()) {
+    if (
+      state.game.activeGame !== null &&
+      state.game.activeGame.toString() === coords.toString()
+    ) {
       const activeRow = state.game.guessedWords[coords[0]][coords[1]].length
       if (activeRow === rowNumber) {
         return state.game.inputValue
