@@ -78,7 +78,7 @@ function Game() {
     return <div>Loading...</div>
   }
   const wordles = wordleWinners.map((row, i) =>
-    row.map((_, j) => <Wordle coords={[i, j]} />)
+    row.map((_, j) => <Wordle key={[i, j].toString()} coords={[i, j]} />)
   )
   let inputWordle = null
   let inputKeyBoard = null

@@ -34,7 +34,7 @@ function Row(args: RowProps) {
       <div className="row">
         {[...Array(5)].map((e, i) => (
           <div
-            className={`cell ${getCellColour(guessedWord.toLowerCase(), correctWord.toLowerCase(), i)}`}
+            key={i} className={`cell ${getCellColour(guessedWord.toLowerCase(), correctWord.toLowerCase(), i)}`}
           >
             {guessedWord[i]}
           </div>
@@ -45,7 +45,7 @@ function Row(args: RowProps) {
     return (
       <div className="row">
         {[...Array(5)].map((e, i) => (
-          <div className="cell">{inputValue[i] || ''}</div>
+          <div key={i} className="cell">{inputValue[i] || ''}</div>
         ))}
       </div>
     )

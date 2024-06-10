@@ -41,7 +41,7 @@ function Wordle(args: WordleProps) {
     >
       <div id="board">
         {[...Array(5)].map((e, i) => (
-          <Row rowNumber={i} coords={coords} />
+          <Row key={i} rowNumber={i} coords={coords} />
         ))}
       </div>
     </div>
