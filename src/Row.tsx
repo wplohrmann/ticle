@@ -3,8 +3,8 @@ import { getCellColour } from './utils'
 import { useAppSelector } from './hooks'
 import { useGetCorrectWordsQuery } from './apiSlice'
 interface RowProps {
-  rowNumber: number;
-  coords: [number, number];
+  rowNumber: number
+  coords: [number, number]
 }
 
 function Row(args: RowProps) {

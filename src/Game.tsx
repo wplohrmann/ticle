@@ -13,19 +13,23 @@ function Game() {
   const wordleWinners = useAppSelector((state) => state.game.wordleWinners)
   const currentPlayer = useAppSelector((state) => state.game.currentPlayer)
   const activeGame = useAppSelector((state) => state.game.activeGame)
-  const popUpRef = useRef(null)
+  const popUpRef = useRef<HTMLDivElement>(null)
 
-  const { data: correctWords, isLoading: isCorrectWordsLoading, error } =
+  const { data: correctWords, isLoading: isCorrectWordsLoading } =
     useGetCorrectWordsQuery({})
 
-  const { isLoading: isLoadingPossibleWords } = useGetPossibleWordsQuery({})
+  const { data: possibleWords, isLoading: isLoadingPossibleWords } =
+    useGetPossibleWordsQuery({})
 
   const isLoading = isCorrectWordsLoading || isLoadingPossibleWords
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      console.log('Click!', popUpRef.current, event.target)
-      if (popUpRef.current && !popUpRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        popUpRef.current &&
+        event.target !== null &&
+        !popUpRef.current.contains(event.target as Node)
+      ) {
         dispatch(gameActions.exitPopUp())
       }
     }
@@ -39,18 +43,23 @@ function Game() {
   }, [popUpRef, dispatch])
 
   useEffect(() => {
-    function handleKeyPress(event) {
+    function handleKeyPress(event: KeyboardEvent) {
       if (activeGame === null && /^[1-9]$/.test(event.key)) {
+        const keyNumber = parseInt(event.key)
         dispatch(
           gameActions.selectActiveGame([
-            Math.floor((event.key - 1) / 3),
-            (event.key - 1) % 3,
+            Math.floor((keyNumber - 1) / 3),
+            (keyNumber - 1) % 3,
           ])
         )
       } else if (event.key === 'Escape') {
         dispatch(gameActions.exitPopUp())
-      } else if (event.key === 'Enter') {
-        dispatch(gameActions.submitWord())
+      } else if (
+        event.key === 'Enter' &&
+        correctWords !== undefined &&
+        possibleWords !== undefined
+      ) {
+        dispatch(gameActions.submitWord({ possibleWords, correctWords }))
       } else if (event.key === 'Backspace') {
         dispatch(gameActions.backspace())
       } else if (event.key.length === 1) {
@@ -61,7 +70,7 @@ function Game() {
     return () => {
       document.removeEventListener('keydown', handleKeyPress)
     }
-  }, [activeGame, dispatch])
+  }, [activeGame, dispatch, correctWords, possibleWords])
 
   const turnColour = getPlayerColour(currentPlayer)
 
@@ -69,27 +78,14 @@ function Game() {
     return <div>Loading...</div>
   }
   const wordles = wordleWinners.map((row, i) =>
-    row.map((winner, j) => (
-      <Wordle
-        correctWord={correctWords[i][j]}
-        player={currentPlayer}
-        coords={[i, j]}
-        isActive={
-          activeGame !== null && activeGame[0] === i && activeGame[1] === j
-        }
-        isPopUp={false}
-        winner={winner}
-      />
-    ))
+    row.map((_, j) => <Wordle coords={[i, j]} />)
   )
   let inputWordle = null
   let inputKeyBoard = null
   if (activeGame !== null) {
     const [i, j] = activeGame
-    inputWordle = <Wordle coords={[i, j]} isPopUp={true} />
-    inputKeyBoard = (
-      <Keyboard submitKey={() => true} /> // TODO
-    )
+    inputWordle = <Wordle coords={[i, j]} />
+    inputKeyBoard = <Keyboard />
   }
   return (
     <>

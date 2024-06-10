@@ -1,8 +1,12 @@
-export function getPlayerColour(player) {
+export function getPlayerColour(player: 'X' | 'O') {
   return player === 'X' ? 'red' : 'blue'
 }
 
-export function getCellColour(guessedWord, correctWord, i) {
+export function getCellColour(
+  guessedWord: string,
+  correctWord: string,
+  i: number
+): string {
   const remainingToGuess = correctWord
     .split('')
     .filter((letter, index) => letter !== guessedWord[index])
