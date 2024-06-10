@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAppDispatch } from './hooks'
 import { gameActions } from './gameSlice'
+import { useGetCorrectWordsQuery, useGetPossibleWordsQuery } from './apiSlice'
 
 function Keyboard() {
   const keyboardLayout = [
@@ -9,6 +10,21 @@ function Keyboard() {
     ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫'],
   ]
   const dispatch = useAppDispatch()
+  const { data: correctWords } =
+    useGetCorrectWordsQuery({})
+
+  const { data: possibleWords }  =useGetPossibleWordsQuery({})
+
+  const onClick = (key: string) => {
+    console.log(key)
+    if (key === "ENTER" && possibleWords && correctWords) {
+      dispatch(gameActions.submitWord({possibleWords, correctWords}))
+    } else if (key === "⌫") {
+      dispatch(gameActions.backspace())
+    } else {
+      dispatch(gameActions.submitLetter(key))
+    }
+  }
 
   return (
     <>
@@ -18,7 +34,7 @@ function Keyboard() {
             <button
               className="keyboard-key"
               key={keyIndex}
-              onClick={() => dispatch(gameActions.submitLetter(key))}
+              onClick={() => onClick(key)}
             >
               {key}
             </button>
