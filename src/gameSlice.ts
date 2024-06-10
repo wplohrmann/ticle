@@ -61,9 +61,6 @@ export const gameSlice = createSlice({
         return
       }
       if (state.inputValue.length === 5) {
-        state.guessedWords[state.activeGame[0]][state.activeGame[1]].push(
-          state.inputValue
-        )
         if (
           !action.payload.possibleWords.includes(state.inputValue.toLowerCase())
         ) {
